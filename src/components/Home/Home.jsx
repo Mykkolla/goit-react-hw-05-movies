@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-// import { ListMovies, MovieItem } from './home.styled';
+import { HeaderTitle, ListMovies, MovieItem } from './home.styled';
 import { getTrendingMovies } from '../../Api/Api';
-// import css from './home.module.css';
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -26,18 +25,18 @@ const Home = () => {
 
   return (
     <>
-      <ul>
-        <h2>Trending movies:</h2>
+      <ListMovies>
+        <HeaderTitle>Trending movies:</HeaderTitle>
         {loading
           ? 'Loading...'
           : data.map(({ title, id }) => (
-              <li key={id}>
+              <MovieItem key={id}>
                 <Link to={`/movies/${id}`} state={{ from: location }}>
                   {title}
                 </Link>
-              </li>
+              </MovieItem>
             ))}
-      </ul>
+      </ListMovies>
     </>
   );
 };

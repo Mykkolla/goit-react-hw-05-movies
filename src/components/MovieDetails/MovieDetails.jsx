@@ -1,7 +1,7 @@
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import { getMovieDetails } from '../../Api/Api';
-// import css from './movie-details.module.css';
+import { LinkGoBack, DivPoster } from './MovieDetails.styled';
 import noMovieImg from '../../img/No_Image_Available.jpg';
 
 const MovieDetails = () => {
@@ -41,12 +41,12 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Link to={cameBack}>Go Back</Link>
+      <LinkGoBack to={cameBack}>Go Back</LinkGoBack>
       {loading ? (
         'Loading...'
       ) : (
         <>
-          <div>
+          <DivPoster>
             {data.poster_path ? (
               <img
                 alt={data.original_title}
@@ -66,7 +66,7 @@ const MovieDetails = () => {
               <p>Genres</p>
               <p>{getGenres(data.genres)}</p>
             </div>
-          </div>
+          </DivPoster>
           <div>
             <ul>
               <li>

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieCast } from '../../Api/Api';
-// import css from './cast.module.css';
+import { ImgProfail, UlProfail } from './cast.styled';
 import PropTypes from 'prop-types';
 
 import userImg from '../../img/No_Image_Available.jpg';
@@ -34,23 +34,23 @@ const Cast = () => {
         'Loading...'
       ) : data && data.length > 0 ? (
         <div>
-          <ul>
+          <UlProfail>
             {data.map(({ name, character, profile_path, id }) => (
               <li key={id}>
                 {profile_path ? (
-                  <img
+                  <ImgProfail
                     alt={name}
                     src={`https://image.tmdb.org/t/p/w92${profile_path}`}
                   />
                 ) : (
-                  <img alt={name} src={userImg} />
+                  <ImgProfail alt={name} src={userImg} />
                 )}
 
                 <p>{name}</p>
                 <p>{character}</p>
               </li>
             ))}
-          </ul>
+          </UlProfail>
         </div>
       ) : (
         <p>No data found</p>

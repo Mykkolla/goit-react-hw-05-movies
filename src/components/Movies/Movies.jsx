@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { searchMovie } from '../../Api/Api';
-// import css from './movies.module.css';
 
 const Movies = () => {
   const [data, setData] = useState(null);

@@ -1,0 +1,45 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+// import { ListMovies, MovieItem } from './home.styled';
+import { getTrendingMovies } from '../../Api/Api';
+// import css from './home.module.css';
+
+const Home = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const data = await getTrendingMovies();
+        setData(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+
+  return (
+    <>
+      <ul>
+        <h2>Trending movies:</h2>
+        {loading
+          ? 'Loading...'
+          : data.map(({ title, id }) => (
+              <li key={id}>
+                <Link to={`/movies/${id}`} state={{ from: location }}>
+                  {title}
+                </Link>
+              </li>
+            ))}
+      </ul>
+    </>
+  );
+};
+
+export default Home;
